@@ -105,6 +105,9 @@ $ git checkout master
 Switched to branch 'master'
 
 
+准备合并dev分支，请注意--no-ff参数，表示禁用Fast forward：
+$ git merge --no-ff -m "merge with no-ff" dev
+
 现在，我们把dev分支的工作成果合并到master分支上：
 $ git merge dev
 Updating d46f35e..b17d20e
