@@ -1,0 +1,90 @@
+创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目录：
+
+$ mkdir learngit
+$ cd learngit
+$ pwd
+/Users/michael/learngit
+
+第二步，通过git init命令把这个目录变成Git可以管理的仓库：
+
+$ git init
+Initialized empty Git repository in /Users/michael/learngit/.git/
+
+
+
+第一步，用命令git add告诉Git，把文件添加到仓库：
+
+$ git add <file>
+
+第二步，用命令git commit告诉Git，把文件提交到仓库：
+
+$ git commit -m "关键词"
+
+
+运行git status命令看看结果：查看状态
+
+$ git status
+
+
+需要用git diff这个命令看看：查看文件修改了些什么
+
+$ git diff <file> 
+
+
+git log命令显示从最近到最远的提交日志
+$ git log --pretty=oneline
+ce5775e9c546dddfd942f6a8b0700da54453106d (HEAD -> master) git
+d628f2faaaf05e6be96943338556f619feb254fc 1
+2a61ccfc428e1e685a07f09812b44a189de6ebe0 branch test
+dbcec00952bb5b8af534ad043263691362439a6d (origin/master) add test1.txt
+d2d0243fce7d343a801f92e70b8b5e788a3012ed add test.txt
+bf9a58890478ee4360c8a75f6ab627888a4e3f48 1
+
+回退到上个版本  回退100个版本:HEAD~100
+$ git reset --hard HEAD^
+
+回退之前版本!!!你看到的一大串类似1094adb...的是commit id（版本号）
+$ git reset --hard <版本号>
+
+Git提供了一个命令git reflog用来记录你的每一次命令：
+$ git reflog
+
+
+查看文件内容
+$ cat <file>
+
+
+
+checkout git checkout -- file可以丢弃工作区的修改：
+$ git checkout -- <file>
+
+命令git checkout -- readme.txt意思就是，把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次git commit或git add时的状态。
+
+
+
+用命令git reset HEAD <file>可以把暂存区的修改撤销掉（unstage），重新放回工作区：
+$ git reset HEAD <file>
+git reset命令既可以回退版本，也可以把暂存区的修改回退到工作区。当我们用HEAD时，表示最新的版本。
+
+删除工作区的文件
+$ rm <file>
+删除暂存区的文件
+$ git rm <file>    并提交 $ git commit -m ""
+
+
+另一种情况是删错了，因为版本库里还有呢，所以可以很轻松地把误删的文件恢复到最新版本：
+$ git checkout -- <file>
+git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。
+
+
+要关联一个远程库，使用命令git remote add origin git@server-name:fangkaiwu/repo-name.git；
+关联后，使用命令git push -u origin master第一次推送master分支的所有内容；
+此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
+$ git push origin master
+
