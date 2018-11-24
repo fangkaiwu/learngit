@@ -88,3 +88,31 @@ git checkout其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都
 此后，每次本地提交后，只要有必要，就可以使用命令git push origin master推送最新修改；
 $ git push origin master
 
+
+
+
+首先，我们创建dev分支，然后切换到dev分支：
+$ git checkout -b dev
+Switched to a new branch 'dev'
+
+然后，用git branch命令查看当前分支：
+$ git branch
+* dev
+  master
+
+现在，dev分支的工作完成，我们就可以切换回master分支：
+$ git checkout master
+Switched to branch 'master'
+
+
+现在，我们把dev分支的工作成果合并到master分支上：
+$ git merge dev
+Updating d46f35e..b17d20e
+Fast-forward
+ readme.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+
+合并完成后，就可以放心地删除dev分支了：
+$ git branch -d dev
+Deleted branch dev (was b17d20e).
