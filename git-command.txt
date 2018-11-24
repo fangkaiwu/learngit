@@ -119,3 +119,24 @@ Fast-forward
 合并完成后，就可以放心地删除dev分支了：
 $ git branch -d dev
 Deleted branch dev (was b17d20e).
+
+
+Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：
+$ git stash
+
+假定需要在master分支上修复，就从master创建临时分支：
+$ git checkout master       (切换工作分支)
+$ git checkout -b issue-101 (创建临时分支)
+修复后提交 (add commit)
+修复完成后，切换到master分支，并完成合并，最后删除issue-101分支：
+$ git checkout master
+$ git merge --no-ff -m "merged bug fix 101" issue-101
+$ git branch issue-101
+
+工作区是干净的，刚才的工作现场存到哪去了？用git stash list命令看看：
+$ git stash list
+stash@{0}: WIP on dev: f52c633 add merge
+
+工作现场还在，Git把stash内容存在某个地方了，但是需要恢复一下，有两个办法：
+另一种方式是用git stash pop，恢复的同时把stash内容也删了：
+$ git stash pop
